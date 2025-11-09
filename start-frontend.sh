@@ -3,11 +3,11 @@
 # Start only the frontend server
 # Use this if you want to run backend and frontend in separate terminals
 
-echo "🚀 Starting Quorum Dashboard Frontend..."
+echo "🚀 Starting AgentPay Economy Frontend..."
 echo ""
 
-# Navigate to quorum-dashboard directory
-cd quorum-dashboard || exit 1
+# Navigate to flux-economy directory
+cd flux-economy || exit 1
 
 # Check if node_modules exists
 if [ ! -d "node_modules" ]; then

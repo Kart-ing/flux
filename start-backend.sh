@@ -3,7 +3,7 @@
 # Start only the backend server
 # Use this if you want to run backend and frontend in separate terminals
 
-echo "🚀 Starting Quorum Dashboard Backend..."
+echo "🚀 Starting AgentPay Economy Backend..."
 echo ""
 
 # Check if venv exists and activate it
@@ -16,7 +16,7 @@ else
 fi
 
 # Navigate to backend directory
-cd quorum-dashboard/backend || exit 1
+cd flux-economy/backend || exit 1
 
 echo "🎯 Starting backend server on http://localhost:5001"
 echo "💡 Press Ctrl+C to stop"
