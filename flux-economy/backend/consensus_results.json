@@ -1,0 +1,191 @@
+{
+  "scenario_1": {
+    "approved": true,
+    "yes_votes": 5,
+    "no_votes": 0,
+    "abstain_votes": 0,
+    "average_risk_score": 2.8,
+    "agent_votes": [
+      {
+        "agent_name": "CFO Agent",
+        "emoji": "\ud83d\udcbc",
+        "vote": "YES",
+        "reasoning": "This request demonstrates exceptional ROI with a 6:1 monthly return ($500 investment vs $3,000 monthly savings). The 300% increase in support tickets creates urgent operational need, and the proposed solution directly addresses capacity constraints while improving customer experience. The low initial cost and clear metrics make this a financially sound investment.",
+        "risk_score": 3,
+        "conditions": "Require monthly performance reports showing ticket reduction percentages and actual cost savings achieved. Implement a 3-month trial period with the option to discontinue if projected savings are not realized within 60 days.",
+        "model": "anthropic/claude-sonnet-4-20250514"
+      },
+      {
+        "agent_name": "Growth Agent",
+        "emoji": "\ud83d\ude80",
+        "vote": "YES",
+        "reasoning": "This is a no-brainer investment for aggressive growth. AI-powered support enables rapid scaling, reduces human costs, and improves experience\u2014exactly the kind of leverage we need to capture more market share. With a clear path to ROI and high scalability, the upside far outweighs the minimal spend.",
+        "risk_score": 2,
+        "conditions": "Implement tracking for chatbot performance and customer satisfaction, and report ROI after 60 days to target further scale-up if results are positive.",
+        "model": "openai/gpt-4.1"
+      },
+      {
+        "agent_name": "Risk Assessment Agent",
+        "emoji": "\ud83d\udee1\ufe0f",
+        "vote": "YES",
+        "reasoning": "The purchase of OpenAI API credits for a customer support chatbot presents a favorable risk-adjusted return, given the potential to significantly reduce support costs and improve customer satisfaction. The urgency and expected ROI justify the investment, although there are inherent risks associated with reliance on third-party AI services and data privacy concerns.",
+        "risk_score": 4,
+        "conditions": "Ensure compliance with data protection regulations and implement regular performance and security audits of the chatbot.",
+        "model": "xai/grok-2-1212"
+      },
+      {
+        "agent_name": "Operations Agent",
+        "emoji": "\u2699\ufe0f",
+        "vote": "YES",
+        "reasoning": "This purchase request solves a real operational problem by reducing the workload on customer support agents and improves response time, which is easy to measure and has a direct impact on customer satisfaction. The expected ROI of $3,000/month is significant, and implementing an AI chatbot is a practical solution to handle common questions.",
+        "risk_score": 2,
+        "conditions": "The implementation team must provide clear guidelines on integration and training for the chatbot, ensuring seamless interaction with our existing ticketing system, and metrics for measuring its effectiveness must be established within the first 30 days of deployment.",
+        "model": "cerebras/llama3.1-8b"
+      },
+      {
+        "agent_name": "Data Agent",
+        "emoji": "\ud83d\udcca",
+        "vote": "YES",
+        "reasoning": "Ticket volume has increased 300%, and data suggests the chatbot could address the majority of common inquiries, saving an estimated $3,000/month. The one-time $500 investment is relatively small compared to the projected monthly cost savings.",
+        "risk_score": 3,
+        "conditions": "Implement performance tracking to confirm a 70% response success rate within the first month; if ROI targets are not met, reassess the initiative.",
+        "model": "openai/o1"
+      }
+    ],
+    "purchase_request": {
+      "amount": 500,
+      "purpose": "OpenAI API credits for customer support chatbot",
+      "requesting_agent": "Customer Service Agent",
+      "justification": "Our support tickets have increased 300% this month. An AI chatbot could handle 70% of common questions, reducing response time from 4 hours to instant.",
+      "expected_roi": "Save $3,000/month in support costs, improve customer satisfaction scores",
+      "urgency": "High",
+      "budget_remaining": 10000
+    }
+  },
+  "scenario_2": {
+    "approved": true,
+    "yes_votes": 3,
+    "no_votes": 2,
+    "abstain_votes": 0,
+    "average_risk_score": 4.2,
+    "agent_votes": [
+      {
+        "agent_name": "CFO Agent",
+        "emoji": "\ud83d\udcbc",
+        "vote": "NO",
+        "reasoning": "The request lacks concrete business justification and measurable ROI metrics. At $5000 for communication software, this represents a significant expense without clear evidence that current communication issues are materially impacting productivity or revenue. The vague justification of 'team communication could be better' and undefined 'improved team communication' as ROI does not meet the threshold for approval.",
+        "risk_score": 7,
+        "conditions": "Would require detailed analysis showing current communication pain points, quantified productivity losses, comparison with lower-cost alternatives, and specific metrics to measure ROI within 6 months.",
+        "model": "anthropic/claude-sonnet-4-20250514"
+      },
+      {
+        "agent_name": "Growth Agent",
+        "emoji": "\ud83d\ude80",
+        "vote": "YES",
+        "reasoning": "Upgrading to a premium Slack workspace with all add-ons directly supports rapid scale by maximizing team productivity and connectivity. High-performance communication tools are foundational for accelerated growth, and the budget impact is justified by the potential for market capture through improved internal synergy. Waiting for clear-cut ROI slows us down\u2014aggressive expansion demands preemptive investment in infrastructure.",
+        "risk_score": 3,
+        "conditions": "",
+        "model": "openai/gpt-4.1"
+      },
+      {
+        "agent_name": "Risk Assessment Agent",
+        "emoji": "\ud83d\udee1\ufe0f",
+        "vote": "YES",
+        "reasoning": "The purchase of a Premium Slack workspace aligns with improving team communication, which is a valid business need. The risk associated with this purchase is low as Slack is a well-established and reliable vendor with strong security measures in place. The expected ROI in terms of enhanced communication justifies the cost.",
+        "risk_score": 2,
+        "conditions": "Ensure that the premium features are fully utilized and that the team is trained on the new integrations and search capabilities to maximize the return on investment.",
+        "model": "xai/grok-2-1212"
+      },
+      {
+        "agent_name": "Operations Agent",
+        "emoji": "\u2699\ufe0f",
+        "vote": "YES",
+        "reasoning": "The premium Slack workspace with all add-ons will improve team communication by enhancing search functionality and integrating with other tools, which will likely have a positive impact on internal operations. This purchase addresses an existing pain point and aligns with the expected ROI. The request is also well-justified with a clear purpose.",
+        "risk_score": 6,
+        "conditions": "Confirmation from key stakeholders on the team that they are willing to adapt to the new features and functionality of the premium Slack workspace.",
+        "model": "cerebras/llama3.1-8b"
+      },
+      {
+        "agent_name": "Data Agent",
+        "emoji": "\ud83d\udcca",
+        "vote": "NO",
+        "reasoning": "There is insufficient data demonstrating tangible productivity gains or time savings from the proposed upgrade. The request lacks metrics on current communication bottlenecks, usage statistics, or clear cost-benefit analysis. Without solid evidence, it is difficult to justify a $5000 expense on this upgrade.",
+        "risk_score": 3,
+        "conditions": "Provide usage metrics or run a pilot to quantify the incremental value of premium features.",
+        "model": "openai/o1"
+      }
+    ],
+    "purchase_request": {
+      "amount": 5000,
+      "purpose": "Premium Slack workspace with all add-ons",
+      "requesting_agent": "Internal Comms Agent",
+      "justification": "Team communication could be better. Premium features include better search and more integrations.",
+      "expected_roi": "Improved team communication",
+      "urgency": "Low",
+      "budget_remaining": 10000
+    }
+  },
+  "scenario_3": {
+    "approved": true,
+    "yes_votes": 4,
+    "no_votes": 1,
+    "abstain_votes": 0,
+    "average_risk_score": 4.6,
+    "agent_votes": [
+      {
+        "agent_name": "CFO Agent",
+        "emoji": "\ud83d\udcbc",
+        "vote": "NO",
+        "reasoning": "While the potential $50K ROI seems attractive against a $2K investment, the justification lacks concrete evidence and relies heavily on speculation about competitive advantage. The request provides no market research, customer validation, or detailed implementation plan to support the claimed 6-month competitive advantage or revenue projections. The 'potential' language and absence of fallback plans make this too speculative for approval.",
+        "risk_score": 7,
+        "conditions": "Approval contingent on providing: 1) Market research demonstrating customer demand for this AI feature, 2) Detailed technical implementation timeline, 3) Competitive analysis showing actual gap exists, 4) Lower-cost pilot program to validate assumptions before full enterprise commitment",
+        "model": "anthropic/claude-sonnet-4-20250514"
+      },
+      {
+        "agent_name": "Growth Agent",
+        "emoji": "\ud83d\ude80",
+        "vote": "YES",
+        "reasoning": "Securing early access to advanced AI like Anthropic Claude gives us a critical window to innovate ahead of competitors, directly supporting our aggressive growth strategy. The potential ROI is significant, easily justifying the $2000 ask, and our remaining budget provides ample buffer for calculated bets like this.",
+        "risk_score": 4,
+        "conditions": "Deliver a prototype or market validation result within 90 days to prove the feature's potential.",
+        "model": "openai/gpt-4.1"
+      },
+      {
+        "agent_name": "Risk Assessment Agent",
+        "emoji": "\ud83d\udee1\ufe0f",
+        "vote": "YES",
+        "reasoning": "The potential ROI of $50K+ from a new feature powered by advanced AI capabilities justifies the $2000 investment. However, the reliability of Anthropic as a vendor and the security of their API must be thoroughly vetted to mitigate risks associated with data privacy and service continuity.",
+        "risk_score": 4,
+        "conditions": "Approval is contingent on a satisfactory security audit of the Anthropic Claude API and a review of their service level agreements to ensure reliability.",
+        "model": "xai/grok-2-1212"
+      },
+      {
+        "agent_name": "Operations Agent",
+        "emoji": "\u2699\ufe0f",
+        "vote": "YES",
+        "reasoning": "The Anthropic Claude API Enterprise plan provides advanced AI capabilities that address a specific business need and could give us a 6-month competitive advantage. The expected ROI of $50K+ in new customer revenue justifies the investment. The early access to latest models also aligns with our product development priorities.",
+        "risk_score": 4,
+        "conditions": "Ensure that a clear plan is in place for integrating the new AI capabilities into existing products and processes, and provide regular updates on the progress and any potential roadblocks.",
+        "model": "cerebras/llama3.1-8b"
+      },
+      {
+        "agent_name": "Data Agent",
+        "emoji": "\ud83d\udcca",
+        "vote": "YES",
+        "reasoning": "The requested amount is feasible given the remaining budget, and the potential 25x ROI provides a strong data-driven rationale despite some uncertainty. The investment aligns with strategic goals and offers a measurable competitive advantage if the feature succeeds.",
+        "risk_score": 4,
+        "conditions": "Require a pilot phase with defined success metrics and a clear timeframe (e.g., 3 months) to validate the feature\u2019s impact and customer adoption before committing further resources.",
+        "model": "openai/o1"
+      }
+    ],
+    "purchase_request": {
+      "amount": 2000,
+      "purpose": "Anthropic Claude API Enterprise plan",
+      "requesting_agent": "Product Development Agent",
+      "justification": "Need advanced AI capabilities for new product feature that competitors don't have. Early access to latest models could give us 6-month competitive advantage.",
+      "expected_roi": "Potential $50K+ in new customer revenue if feature succeeds",
+      "urgency": "Medium",
+      "budget_remaining": 10000
+    }
+  }
+}
