@@ -1,394 +1,383 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Copy, Check } from 'lucide-react';
 
 export default function DocsPage() {
-  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [copiedSection, setCopiedSection] = useState<string | null>(null);
 
-  const copyToClipboard = async (code: string, id: string) => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopiedCode(id);
-      setTimeout(() => setCopiedCode(null), 1600);
-    } catch {
-      // noop
-    }
+  const copyToClipboard = (text: string, section: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedSection(section);
+    setTimeout(() => setCopiedSection(null), 2000);
   };
 
-  const CodeBlock = ({
-    code,
-    id,
-    language = 'bash',
-  }: {
-    code: string;
-    id: string;
-    language?: string;
-  }) => (
-    <div className="relative group mt-4">
-      <div className="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden bg-slate-50 dark:bg-slate-950">
-        <div className="flex items-center justify-between px-4 py-2 text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 bg-slate-100/60 dark:bg-slate-900/60">
-          <span>{language}</span>
-          <button
-            aria-label="Copy code to clipboard"
-            onClick={() => copyToClipboard(code, id)}
-            className="inline-flex items-center gap-2 rounded-md px-2.5 py-1.5 text-slate-600 ring-1 ring-slate-300 transition hover:bg-white/60 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-slate-300 dark:ring-slate-700 dark:hover:bg-slate-800/60 dark:hover:text-white"
-          >
-            {copiedCode === id ? (
-              <>
-                <Check className="h-4 w-4" />
-                Copied
-              </>
-            ) : (
-              <>
-                <Copy className="h-4 w-4" />
-                Copy
-              </>
-            )}
-          </button>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white">
+      <div className="max-w-5xl mx-auto px-6 py-12">
+        {/* Header */}
+        <div className="mb-12">
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            AgentPay SDK Documentation
+          </h1>
+          <p className="text-xl text-gray-300">
+            Enable autonomous AI agents to make purchases, manage budgets, and participate in consensus-based approval flows.
+          </p>
         </div>
 
-        <pre className="max-h-[520px] overflow-auto px-4 md:px-5 py-4 text-sm leading-relaxed bg-slate-900 text-slate-100 dark:bg-slate-950/90">
-          <code className="whitespace-pre">{code}</code>
-        </pre>
+        {/* Key Features */}
+        <section className="mb-12 bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+          <h2 className="text-3xl font-bold mb-6 text-purple-300">✨ Key Features</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">🤖</span>
+              <div>
+                <h3 className="font-semibold text-lg">Autonomous Agent Support</h3>
+                <p className="text-gray-400">AI agents can request and use virtual payment cards</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">🗳️</span>
+              <div>
+                <h3 className="font-semibold text-lg">AI Consensus System</h3>
+                <p className="text-gray-400">5 specialized AI agents vote on purchase approvals</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">💳</span>
+              <div>
+                <h3 className="font-semibold text-lg">Virtual Card Management</h3>
+                <p className="text-gray-400">Request, activate, and charge virtual payment cards</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">📊</span>
+              <div>
+                <h3 className="font-semibold text-lg">Transaction Tracking</h3>
+                <p className="text-gray-400">Complete ledger of all agent transactions and consensus votes</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Installation */}
+        <section className="mb-12 bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+          <h2 className="text-3xl font-bold mb-6 text-purple-300">📦 Installation</h2>
+          <div className="space-y-4">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-lg font-semibold">Install from Git</h3>
+                <button
+                  onClick={() => copyToClipboard('pip install git+https://github.com/Swayam-Bansal/AgentPay-SDK.git', 'install')}
+                  className="px-3 py-1 bg-purple-600 hover:bg-purple-700 rounded text-sm transition-colors"
+                >
+                  {copiedSection === 'install' ? '✓ Copied!' : 'Copy'}
+                </button>
+              </div>
+              <pre className="bg-black/50 p-4 rounded-lg overflow-x-auto">
+                <code className="text-green-400">pip install git+https://github.com/Swayam-Bansal/AgentPay-SDK.git</code>
+              </pre>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Required Dependencies</h3>
+              <pre className="bg-black/50 p-4 rounded-lg overflow-x-auto">
+                <code className="text-gray-300">requests &gt;= 2.31.0</code>
+              </pre>
+            </div>
+          </div>
+        </section>
+
+        {/* Quick Start */}
+        <section className="mb-12 bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+          <h2 className="text-3xl font-bold mb-6 text-purple-300">🚀 Quick Start</h2>
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-lg font-semibold">Basic Usage Example</h3>
+              <button
+                onClick={() => copyToClipboard('import os\nfrom agentpay import AgentPaySDK\n\n# Initialize SDK\nsdk = AgentPaySDK(\n    api_key=os.getenv("AGENTPAY_API_KEY"),\n    base_url=os.getenv("AGENTPAY_BASE_URL", "http://localhost:5001")\n)\n\n# Register an agent\nagent_id = sdk.register_agent(\n    name="ShoppingAgent",\n    agent_type="autonomous",\n    capabilities=["purchase", "budget_management"]\n)\n\n# Request a payment card\ncard = sdk.request_payment_card(\n    agent_id=agent_id,\n    amount=100.0,\n    purpose="Purchase ML training credits"\n)\n\nprint(f"Card issued: {card[\'card_number\']}")\nprint(f"Status: {card[\'status\']}")', 'quickstart')}
+                className="px-3 py-1 bg-purple-600 hover:bg-purple-700 rounded text-sm transition-colors"
+              >
+                {copiedSection === 'quickstart' ? '✓ Copied!' : 'Copy'}
+              </button>
+            </div>
+            <pre className="bg-black/50 p-4 rounded-lg overflow-x-auto">
+              <code className="text-gray-300">
+{`import os
+from agentpay import AgentPaySDK
+
+# Initialize SDK
+sdk = AgentPaySDK(
+    api_key=os.getenv("AGENTPAY_API_KEY"),
+    base_url=os.getenv("AGENTPAY_BASE_URL", "http://localhost:5001")
+)
+
+# Register an agent
+agent_id = sdk.register_agent(
+    name="ShoppingAgent",
+    agent_type="autonomous",
+    capabilities=["purchase", "budget_management"]
+)
+
+# Request a payment card
+card = sdk.request_payment_card(
+    agent_id=agent_id,
+    amount=100.0,
+    purpose="Purchase ML training credits"
+)
+
+print(f"Card issued: {card['card_number']}")
+print(f"Status: {card['status']}")`}
+              </code>
+            </pre>
+          </div>
+        </section>
+
+        {/* Core Methods */}
+        <section className="mb-12 bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+          <h2 className="text-3xl font-bold mb-6 text-purple-300">🔧 Core SDK Methods</h2>
+          
+          <div className="space-y-6">
+            {/* register_agent */}
+            <div>
+              <h3 className="text-xl font-semibold mb-2 text-purple-200">register_agent()</h3>
+              <p className="text-gray-400 mb-3">Register a new autonomous agent in the system</p>
+              <pre className="bg-black/50 p-4 rounded-lg overflow-x-auto mb-2">
+                <code className="text-gray-300">
+{`agent_id = sdk.register_agent(
+    name="DataAnalysisAgent",
+    agent_type="autonomous",
+    capabilities=["data_processing", "api_calls"],
+    budget_limit=500.0
+)`}
+                </code>
+              </pre>
+            </div>
+
+            {/* request_payment_card */}
+            <div>
+              <h3 className="text-xl font-semibold mb-2 text-purple-200">request_payment_card()</h3>
+              <p className="text-gray-400 mb-3">Request a virtual payment card for purchases</p>
+              <pre className="bg-black/50 p-4 rounded-lg overflow-x-auto">
+                <code className="text-gray-300">
+{`card = sdk.request_payment_card(
+    agent_id=agent_id,
+    amount=250.0,
+    purpose="API credits for OpenAI GPT-4",
+    merchant="OpenAI",
+    metadata={"project": "customer_support_bot"}
+)
+
+print(f"Card Number: {card['card_number']}")
+print(f"CVV: {card['cvv']}")
+print(f"Expiry: {card['expiry_date']}")
+print(f"Status: {card['status']}")  # 'pending_approval'`}
+                </code>
+              </pre>
+            </div>
+
+            {/* charge_card */}
+            <div>
+              <h3 className="text-xl font-semibold mb-2 text-purple-200">charge_card()</h3>
+              <p className="text-gray-400 mb-3">Charge an approved virtual card</p>
+              <pre className="bg-black/50 p-4 rounded-lg overflow-x-auto">
+                <code className="text-gray-300">
+{`# After card is approved
+transaction = sdk.charge_card(
+    card_number=card['card_number'],
+    amount=50.0,
+    description="1M tokens GPT-4 API usage"
+)
+
+print(f"Transaction ID: {transaction['id']}")
+print(f"Status: {transaction['status']}")
+print(f"New Balance: {transaction['new_balance']}")`}
+                </code>
+              </pre>
+            </div>
+
+            {/* get_transactions */}
+            <div>
+              <h3 className="text-xl font-semibold mb-2 text-purple-200">get_transactions()</h3>
+              <p className="text-gray-400 mb-3">Retrieve transaction history for an agent</p>
+              <pre className="bg-black/50 p-4 rounded-lg overflow-x-auto">
+                <code className="text-gray-300">
+{`transactions = sdk.get_transactions(
+    agent_id=agent_id,
+    limit=10
+)
+
+for tx in transactions:
+    print(f"{tx['timestamp']}: {tx['description']} - {tx['amount']}")`}
+                </code>
+              </pre>
+            </div>
+          </div>
+        </section>
+
+        {/* AI Consensus System */}
+        <section className="mb-12 bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+          <h2 className="text-3xl font-bold mb-6 text-purple-300">🗳️ AI Consensus System</h2>
+          <p className="text-gray-300 mb-6">
+            Every payment card request is evaluated by 5 specialized AI agents who vote on approval. 
+            The system uses LLaMA 3.2 models to analyze risk, business value, and budget impact.
+          </p>
+          
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
+            <div className="bg-black/30 p-4 rounded-lg">
+              <h3 className="font-semibold mb-2 text-purple-200">🛡️ Risk Agent</h3>
+              <p className="text-sm text-gray-400">Analyzes security risks and fraud potential</p>
+            </div>
+            <div className="bg-black/30 p-4 rounded-lg">
+              <h3 className="font-semibold mb-2 text-purple-200">💼 Business Agent</h3>
+              <p className="text-sm text-gray-400">Evaluates business value and ROI</p>
+            </div>
+            <div className="bg-black/30 p-4 rounded-lg">
+              <h3 className="font-semibold mb-2 text-purple-200">💰 Budget Agent</h3>
+              <p className="text-sm text-gray-400">Checks budget constraints and spending patterns</p>
+            </div>
+            <div className="bg-black/30 p-4 rounded-lg">
+              <h3 className="font-semibold mb-2 text-purple-200">📊 Technical Agent</h3>
+              <p className="text-sm text-gray-400">Assesses technical feasibility</p>
+            </div>
+            <div className="bg-black/30 p-4 rounded-lg md:col-span-2">
+              <h3 className="font-semibold mb-2 text-purple-200">⚖️ Compliance Agent</h3>
+              <p className="text-sm text-gray-400">Ensures regulatory compliance</p>
+            </div>
+          </div>
+
+          <div className="bg-black/30 p-6 rounded-lg">
+            <h3 className="font-semibold mb-3 text-purple-200">Voting Process</h3>
+            <ul className="space-y-2 text-gray-300">
+              <li className="flex items-start gap-2">
+                <span className="text-green-400">1.</span>
+                <span>Agent requests a payment card with purpose and amount</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-400">2.</span>
+                <span>5 AI agents independently analyze the request</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-400">3.</span>
+                <span>Each agent votes: approve, reject, or needs_info</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-400">4.</span>
+                <span>Majority approval (3+ votes) activates the card</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-400">5.</span>
+                <span>All votes and reasoning are logged for transparency</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* API Endpoints Reference */}
+        <section className="mb-12 bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+          <h2 className="text-3xl font-bold mb-6 text-purple-300">🔌 API Endpoints Reference</h2>
+          <p className="text-gray-300 mb-6">
+            The SDK communicates with these backend endpoints (default: http://localhost:5001):
+          </p>
+          
+          <div className="space-y-4">
+            <div className="bg-black/30 p-4 rounded-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="px-2 py-1 bg-green-600 text-xs rounded font-mono">POST</span>
+                <code className="text-purple-300">/api/agents</code>
+              </div>
+              <p className="text-sm text-gray-400">Register a new agent</p>
+            </div>
+            
+            <div className="bg-black/30 p-4 rounded-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="px-2 py-1 bg-blue-600 text-xs rounded font-mono">GET</span>
+                <code className="text-purple-300">/api/agents/:id</code>
+              </div>
+              <p className="text-sm text-gray-400">Get agent details</p>
+            </div>
+            
+            <div className="bg-black/30 p-4 rounded-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="px-2 py-1 bg-green-600 text-xs rounded font-mono">POST</span>
+                <code className="text-purple-300">/api/cards/request</code>
+              </div>
+              <p className="text-sm text-gray-400">Request a virtual payment card</p>
+            </div>
+            
+            <div className="bg-black/30 p-4 rounded-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="px-2 py-1 bg-green-600 text-xs rounded font-mono">POST</span>
+                <code className="text-purple-300">/api/cards/charge</code>
+              </div>
+              <p className="text-sm text-gray-400">Charge a virtual card</p>
+            </div>
+            
+            <div className="bg-black/30 p-4 rounded-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="px-2 py-1 bg-blue-600 text-xs rounded font-mono">GET</span>
+                <code className="text-purple-300">/api/cards/:card_number/status</code>
+              </div>
+              <p className="text-sm text-gray-400">Get card status and consensus votes</p>
+            </div>
+            
+            <div className="bg-black/30 p-4 rounded-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="px-2 py-1 bg-blue-600 text-xs rounded font-mono">GET</span>
+                <code className="text-purple-300">/api/agents/:id/transactions</code>
+              </div>
+              <p className="text-sm text-gray-400">Get agent transaction history</p>
+            </div>
+            
+            <div className="bg-black/30 p-4 rounded-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="px-2 py-1 bg-blue-600 text-xs rounded font-mono">GET</span>
+                <code className="text-purple-300">/api/virtual-cards</code>
+              </div>
+              <p className="text-sm text-gray-400">Get all virtual cards</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Support */}
+        <section className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+          <h2 className="text-3xl font-bold mb-6 text-purple-300">💬 Support & Resources</h2>
+          
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="bg-black/30 p-4 rounded-lg">
+              <h3 className="font-semibold mb-2">📚 GitHub Repository</h3>
+              <a 
+                href="https://github.com/Swayam-Bansal/AgentPay-SDK" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-purple-400 hover:text-purple-300 text-sm"
+              >
+                github.com/Swayam-Bansal/AgentPay-SDK
+              </a>
+            </div>
+            
+            <div className="bg-black/30 p-4 rounded-lg">
+              <h3 className="font-semibold mb-2">🐛 Report Issues</h3>
+              <a 
+                href="https://github.com/Swayam-Bansal/AgentPay-SDK/issues" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-purple-400 hover:text-purple-300 text-sm"
+              >
+                Submit bug reports and feature requests
+              </a>
+            </div>
+            
+            <div className="bg-black/30 p-4 rounded-lg">
+              <h3 className="font-semibold mb-2">📖 Examples</h3>
+              <p className="text-sm text-gray-400">Check out the <code className="text-purple-300">examples/</code> directory for more use cases</p>
+            </div>
+            
+            <div className="bg-black/30 p-4 rounded-lg">
+              <h3 className="font-semibold mb-2">🔑 API Keys</h3>
+              <p className="text-sm text-gray-400">Generate your API key in the <a href="/api-keys" className="text-purple-400 hover:text-purple-300">API Keys</a> section</p>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );
-
-  return (
-    <div className="max-w-4xl mx-auto p-8">
-      <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-8">
-        AgentPay SDK Documentation
-      </h1>
-
-      {/* Introduction */}
-      <section className="mb-12">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-4">
-          Introduction
-        </h2>
-        <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-          AgentPay is a powerful payment processing SDK that enables seamless integration of payment functionality into your applications. This documentation will guide you through installation, setup, and usage.
-        </p>
-      </section>
-
-      {/* Installation */}
-      <section className="mb-12">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-4">
-          Installation
-        </h2>
-        <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-          Install AgentPay using npm or yarn:
-        </p>
-        <CodeBlock
-          id="install"
-          language="bash"
-          code={`npm install agentpay
-# or
-yarn add agentpay`}
-        />
-      </section>
-
-      {/* Quick Start */}
-      <section className="mb-12">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-4">
-          Quick Start
-        </h2>
-        <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-          Get started with AgentPay in just a few lines of code:
-        </p>
-        <CodeBlock
-          id="quickstart"
-          language="ts"
-          code={`import { AgentPay } from 'agentpay';
-
-const agentPay = new AgentPay({
-  apiKey: 'your-api-key',
-  environment: 'production'
-});
-
-// Create a payment
-const payment = await agentPay.createPayment({
-  amount: 1000,
-  currency: 'USD',
-  description: 'Product purchase'
-});`}
-        />
-      </section>
-
-      {/* Configuration */}
-      <section className="mb-12">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-4">
-          Configuration
-        </h2>
-        <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-          Configure AgentPay with the following options:
-        </p>
-        <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 mb-4 dark:border-slate-800 dark:bg-slate-900/40">
-          <ul className="space-y-2">
-            <li className="text-slate-700 dark:text-slate-300">
-              <strong className="text-slate-900 dark:text-white">apiKey</strong> (required): Your AgentPay API key
-            </li>
-            <li className="text-slate-700 dark:text-slate-300">
-              <strong className="text-slate-900 dark:text-white">environment</strong>: 'development' | 'production' (default: 'production')
-            </li>
-            <li className="text-slate-700 dark:text-slate-300">
-              <strong className="text-slate-900 dark:text-white">timeout</strong>: Request timeout in milliseconds (default: 30000)
-            </li>
-            <li className="text-slate-700 dark:text-slate-300">
-              <strong className="text-slate-900 dark:text-white">retries</strong>: Number of retry attempts (default: 3)
-            </li>
-          </ul>
-        </div>
-        <CodeBlock
-          id="config"
-          language="ts"
-          code={`const agentPay = new AgentPay({
-  apiKey: process.env.AGENTPAY_API_KEY,
-  environment: 'production',
-  timeout: 30000,
-  retries: 3
-});`}
-        />
-      </section>
-
-      {/* Core Methods */}
-      <section className="mb-12">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-4">
-          Core Methods
-        </h2>
-
-        <div className="space-y-8">
-          {/* Create Payment */}
-          <div>
-            <h3 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-3">
-              Create Payment
-            </h3>
-            <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-              Create a new payment transaction:
-            </p>
-            <CodeBlock
-              id="create-payment"
-              language="ts"
-              code={`const payment = await agentPay.createPayment({
-  amount: 5000,
-  currency: 'USD',
-  description: 'Order #1234',
-  metadata: {
-    orderId: '1234',
-    customerId: 'cus_123'
-  }
-});
-
-console.log(payment.id); // Payment ID
-console.log(payment.status); // Payment status`}
-            />
-          </div>
-
-          {/* Get Payment */}
-          <div>
-            <h3 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-3">
-              Get Payment
-            </h3>
-            <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-              Retrieve payment details by ID:
-            </p>
-            <CodeBlock
-              id="get-payment"
-              language="ts"
-              code={`const payment = await agentPay.getPayment('pay_123456');
-
-console.log(payment.amount);
-console.log(payment.status);
-console.log(payment.createdAt);`}
-            />
-          </div>
-
-          {/* Cancel Payment */}
-          <div>
-            <h3 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-3">
-              Cancel Payment
-            </h3>
-            <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-              Cancel a pending payment:
-            </p>
-            <CodeBlock
-              id="cancel-payment"
-              language="ts"
-              code={`const canceledPayment = await agentPay.cancelPayment('pay_123456');
-
-console.log(canceledPayment.status); // 'canceled'`}
-            />
-          </div>
-
-          {/* List Payments */}
-          <div>
-            <h3 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-3">
-              List Payments
-            </h3>
-            <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-              Retrieve a list of payments with optional filters:
-            </p>
-            <CodeBlock
-              id="list-payments"
-              language="ts"
-              code={`const payments = await agentPay.listPayments({
-  limit: 10,
-  status: 'succeeded',
-  createdAfter: '2024-01-01'
-});
-
-payments.data.forEach(payment => {
-  console.log(payment.id, payment.amount);
-});`}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Webhooks */}
-      <section className="mb-12">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-4">
-          Webhooks
-        </h2>
-        <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-          Set up webhooks to receive real-time payment notifications:
-        </p>
-        <CodeBlock
-          id="webhooks"
-          language="ts"
-          code={`import { verifyWebhookSignature } from 'agentpay';
-
-app.post('/webhooks/agentpay', (req, res) => {
-  const signature = req.headers['agentpay-signature'];
-  const payload = req.body;
-
-  if (!verifyWebhookSignature(payload, signature, process.env.WEBHOOK_SECRET)) {
-    return res.status(401).send('Invalid signature');
-  }
-
-  const event = payload.event;
-  
-  switch (event.type) {
-    case 'payment.succeeded':
-      console.log('Payment succeeded:', event.data);
-      break;
-    case 'payment.failed':
-      console.log('Payment failed:', event.data);
-      break;
-    default:
-      console.log('Unhandled event type:', event.type);
-  }
-
-  res.json({ received: true });
-});`}
-        />
-      </section>
-
-      {/* Error Handling */}
-      <section className="mb-12">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-4">
-          Error Handling
-        </h2>
-        <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-          Handle errors gracefully with try-catch blocks:
-        </p>
-        <CodeBlock
-          id="error-handling"
-          language="ts"
-          code={`try {
-  const payment = await agentPay.createPayment({
-    amount: 1000,
-    currency: 'USD'
-  });
-} catch (error) {
-  if (error.type === 'invalid_request') {
-    console.error('Invalid request:', error.message);
-  } else if (error.type === 'authentication_error') {
-    console.error('Authentication failed:', error.message);
-  } else if (error.type === 'api_error') {
-    console.error('API error:', error.message);
-  } else {
-    console.error('Unknown error:', error);
-  }
-}`}
-        />
-      </section>
-
-      {/* Best Practices */}
-      <section className="mb-12">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-4">
-          Best Practices
-        </h2>
-        <div className="rounded-xl border-l-4 border-blue-600 bg-blue-50 p-6 text-blue-900 dark:bg-blue-950/40 dark:text-blue-200 dark:border-blue-500">
-          <ul className="space-y-3">
-            <li className="flex items-start">
-              <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-              <span>Always use environment variables for API keys</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-              <span>Implement proper error handling for all payment operations</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-              <span>Use webhooks for reliable payment status updates</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-              <span>Test thoroughly in development mode before going live</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-              <span>Keep your SDK version up to date</span>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      {/* Support */}
-      <section className="mb-12">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-4">
-          Support
-        </h2>
-        <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-          Need help? Here are some resources:
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
-              Documentation
-            </h3>
-            <p className="text-slate-600 dark:text-slate-300">
-              Visit our comprehensive docs at docs.agentpay.com
-            </p>
-          </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
-              Community
-            </h3>
-            <p className="text-slate-600 dark:text-slate-300">
-              Join our Discord community for help and discussions
-            </p>
-          </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
-              Email Support
-            </h3>
-            <p className="text-slate-600 dark:text-slate-300">
-              Contact us at support@agentpay.com
-            </p>
-          </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
-              GitHub
-            </h3>
-            <p className="text-slate-600 dark:text-slate-300">
-              Report issues on our GitHub repository
-            </p>
-          </div>
-        </div>
-      </section>
-    </div>
-    );
-
 }
