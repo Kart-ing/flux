@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Sidebar from '@/components/Sidebar';
+import { getApiUrl } from '@/lib/config';
 
 export default function DashboardLayout({
   children,
@@ -15,7 +16,7 @@ export default function DashboardLayout({
 
   useEffect(() => {
     // Check authentication
-    fetch('http://localhost:5001/api/auth/me', {
+    fetch(getApiUrl('/api/auth/me'), {
       credentials: 'include',
     })
       .then((res) => res.json())

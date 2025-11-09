@@ -16,11 +16,9 @@ import {
 import MetricCard from '@/components/MetricCard';
 import AgentCard from '@/components/AgentCard';
 import TransactionRow from '@/components/TransactionRow';
-import TimeRangeSelector from '@/components/TimeRangeSelector';
 import AgentDetailModal from '@/components/AgentDetailModal';
 
 export default function Dashboard() {
-  const [timeRange, setTimeRange] = useState<TimeRange>('7d');
   const [activeTab, setActiveTab] = useState<'overview' | 'spenders' | 'earners'>('overview');
   const [stats, setStats] = useState<EconomyStats | null>(null);
   const [topSpenders, setTopSpenders] = useState<Agent[]>([]);
@@ -45,7 +43,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     loadData();
-  }, [timeRange, activeTab]);
+  }, [activeTab]);
 
   async function loadData() {
     setLoading(true);
@@ -53,9 +51,9 @@ export default function Dashboard() {
     try {
       if (activeTab === 'overview') {
         const [statsData, spendersData, earnersData, transactionsData] = await Promise.all([
-          fetchEconomyStats(timeRange),
-          fetchTopSpenders(5, timeRange),
-          fetchTopEarners(5, timeRange),
+          fetchEconomyStats('all'),
+          fetchTopSpenders(5, 'all'),
+          fetchTopEarners(5, 'all'),
           fetchRecentTransactions(10),
         ]);
 
@@ -66,7 +64,7 @@ export default function Dashboard() {
       } else if (activeTab === 'spenders') {
         const [allAgentsData, topSpendersData] = await Promise.all([
           fetchAgents(),
-          fetchTopSpenders(100, timeRange),
+          fetchTopSpenders(100, 'all'),
         ]);
 
         const spenders = allAgentsData.filter(a => a.type === 'spender' || a.type === 'both');
@@ -77,10 +75,10 @@ export default function Dashboard() {
         setAllSpenders(sortedSpenders);
         
         if (sortedSpenders.length > 0) {
-          const totalSpent = sortedSpenders.reduce((sum, a) => sum + a.totalSpent, 0);
+          const totalSpent = sortedSpenders.reduce((sum, a) => sum + (a.totalSpent || 0), 0);
           const avgSpend = totalSpent / sortedSpenders.length;
-          const allTransactions = sortedSpenders.reduce((sum, a) => sum + a.transactionCount, 0);
-          const highestTx = Math.max(...sortedSpenders.map(a => a.avgTransactionSize * a.transactionCount || 0));
+          const allTransactions = sortedSpenders.reduce((sum, a) => sum + (a.transactionCount || 0), 0);
+          const highestTx = Math.max(...sortedSpenders.map(a => ((a.avgTransactionSize || 0) * (a.transactionCount || 0)) || 0));
           
           setSpenderStats({
             totalAgents: sortedSpenders.length,
@@ -91,7 +89,7 @@ export default function Dashboard() {
       } else if (activeTab === 'earners') {
         const [allAgentsData, topEarnersData] = await Promise.all([
           fetchAgents(),
-          fetchTopEarners(100, timeRange),
+          fetchTopEarners(100, 'all'),
         ]);
 
         const earners = allAgentsData.filter(a => a.type === 'earner' || a.type === 'both');
@@ -102,9 +100,9 @@ export default function Dashboard() {
         setAllEarners(sortedEarners);
         
         if (sortedEarners.length > 0) {
-          const totalEarned = sortedEarners.reduce((sum, a) => sum + a.totalEarned, 0);
+          const totalEarned = sortedEarners.reduce((sum, a) => sum + (a.totalEarned || 0), 0);
           const avgRevenue = totalEarned / sortedEarners.length;
-          const highestPayment = Math.max(...sortedEarners.map(a => a.avgTransactionSize * a.transactionCount || 0));
+          const highestPayment = Math.max(...sortedEarners.map(a => ((a.avgTransactionSize || 0) * (a.transactionCount || 0)) || 0));
           
           setEarnerStats({
             totalAgents: sortedEarners.length,
@@ -158,7 +156,6 @@ export default function Dashboard() {
               <h1 className="text-4xl font-bold text-white mb-2">Dashboard</h1>
               <p className="text-gray-400">Real-time agent spending & revenue tracking</p>
             </div>
-            <TimeRangeSelector value={timeRange} onChange={setTimeRange} />
           </div>
         </motion.div>
 
@@ -225,7 +222,7 @@ export default function Dashboard() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <MetricCard
                     icon={DollarSign}
-                    value={stats.totalVolume}
+                    value={stats.totalVolume || 0}
                     label="Total Volume"
                     iconBg="bg-gradient-to-br from-purple-500 to-pink-500"
                     trend="up"
@@ -234,7 +231,7 @@ export default function Dashboard() {
                   />
                   <MetricCard
                     icon={ArrowUpRight}
-                    value={stats.totalSpending}
+                    value={stats.totalSpending || 0}
                     label="Total Spending"
                     iconBg="bg-gradient-to-br from-red-500 to-pink-500"
                     isCurrency
@@ -242,7 +239,7 @@ export default function Dashboard() {
                   />
                   <MetricCard
                     icon={ArrowDownLeft}
-                    value={stats.totalRevenue}
+                    value={stats.totalRevenue || 0}
                     label="Total Revenue"
                     iconBg="bg-gradient-to-br from-emerald-500 to-teal-500"
                     isCurrency
@@ -250,7 +247,7 @@ export default function Dashboard() {
                   />
                   <MetricCard
                     icon={Users}
-                    value={stats.activeAgents}
+                    value={stats.activeAgents || 0}
                     label="Active Agents"
                     iconBg="bg-gradient-to-br from-blue-500 to-cyan-500"
                     delay={0.3}
@@ -285,10 +282,10 @@ export default function Dashboard() {
                             </div>
                             <div className="text-right">
                               <div className="text-lg font-bold text-red-400">
-                                ${(agent.totalSpent / 100).toFixed(2)}
+                                ${((agent.totalSpent || 0) / 100).toFixed(2)}
                               </div>
                               <div className="text-xs text-gray-400">
-                                Avg: ${(agent.avgTransactionSize / 100).toFixed(2)}
+                                Avg: ${((agent.avgTransactionSize || 0) / 100).toFixed(2)}
                               </div>
                             </div>
                           </motion.div>
@@ -328,10 +325,10 @@ export default function Dashboard() {
                             </div>
                             <div className="text-right">
                               <div className="text-lg font-bold text-emerald-400">
-                                ${(agent.totalEarned / 100).toFixed(2)}
+                                ${((agent.totalEarned || 0) / 100).toFixed(2)}
                               </div>
                               <div className="text-xs text-gray-400">
-                                Avg: ${(agent.avgTransactionSize / 100).toFixed(2)}
+                                Avg: ${((agent.avgTransactionSize || 0) / 100).toFixed(2)}
                               </div>
                             </div>
                           </motion.div>

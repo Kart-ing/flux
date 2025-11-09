@@ -19,13 +19,32 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', secrets.token_hex(32))
 
+# Configure session for cross-domain cookies
+app.config.update(
+    SESSION_COOKIE_SECURE=True,  # Only send over HTTPS
+    SESSION_COOKIE_HTTPONLY=True,  # Prevent JavaScript access
+    SESSION_COOKIE_SAMESITE='None',  # Allow cross-site requests
+)
+
 # Enable CORS
 CORS(app, supports_credentials=True)
+
+# Allowed origins for CORS
+ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'https://flux-production-1c77.up.railway.app',
+    'https://*.vercel.app',
+    'https://flux-economy-g792nhjm0-kartikey-pandeys-projects-e286300c.vercel.app',
+    'https://flux-economy-jsc0bvx8i-kartikey-pandeys-projects-e286300c.vercel.app',
+    'https://flux-economy-ezyft1a0g-kartikey-pandeys-projects-e286300c.vercel.app',
+    'https://flux-economy.vercel.app'  # Main production domain
+]
 
 @app.after_request
 def after_request(response):
     origin = request.headers.get('Origin')
-    if origin:
+    # Allow localhost and Vercel domains
+    if origin and (origin in ALLOWED_ORIGINS or origin.startswith('http://localhost') or '.vercel.app' in origin):
         response.headers.add('Access-Control-Allow-Origin', origin)
     else:
         response.headers.add('Access-Control-Allow-Origin', '*')
@@ -43,6 +62,25 @@ if USE_SUPABASE:
 else:
     print("💾 Using SQLite database")
     import database as db
+
+# Health check route
+@app.route('/')
+def health_check():
+    """Health check endpoint"""
+    return jsonify({
+        'status': 'healthy',
+        'service': 'AgentPay Economy API',
+        'database': 'supabase' if USE_SUPABASE else 'sqlite',
+        'version': '1.0.0'
+    })
+
+@app.route('/api/health')
+def api_health():
+    """API health check"""
+    return jsonify({
+        'status': 'healthy',
+        'database': 'connected'
+    })
 
 def format_agent(agent_row: Dict) -> Dict:
     """Format agent from database to API format"""

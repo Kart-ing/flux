@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Key, Plus, Copy, Trash2, Eye, EyeOff, X, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { getApiUrl, API_URL } from '@/lib/config';
 
 interface APIKey {
   id: string;
@@ -29,7 +30,7 @@ export default function APIKeysPage() {
 
   const fetchKeys = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/keys', {
+      const response = await fetch(getApiUrl('/api/keys'), {
         credentials: 'include',
       });
       const data = await response.json();
@@ -47,7 +48,7 @@ export default function APIKeysPage() {
     if (!newKeyName.trim()) return;
 
     try {
-      const response = await fetch('http://localhost:5001/api/keys', {
+      const response = await fetch(getApiUrl('/api/keys'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -76,7 +77,7 @@ export default function APIKeysPage() {
     }
 
     try {
-      const response = await fetch(`http://localhost:5001/api/keys/${keyId}`, {
+      const response = await fetch(getApiUrl(`/api/keys/${keyId}`), {
         method: 'DELETE',
         credentials: 'include',
       });
@@ -283,12 +284,12 @@ export default function APIKeysPage() {
 # Initialize SDK with your API key
 sdk = AgentPaySDK(
     api_key="sk_test_your_api_key_here",
-    base_url="http://localhost:5001"
+    base_url="${API_URL}"
 )
 
 # SDK is now connected and ready to use!`}</pre>
                 <button
-                  onClick={() => copyToClipboard(`from agentpay import AgentPaySDK\n\n# Initialize SDK with your API key\nsdk = AgentPaySDK(\n    api_key="sk_test_your_api_key_here",\n    base_url="http://localhost:5001"\n)\n\n# SDK is now connected and ready to use!`)}
+                  onClick={() => copyToClipboard(`from agentpay import AgentPaySDK\n\n# Initialize SDK with your API key\nsdk = AgentPaySDK(\n    api_key="sk_test_your_api_key_here",\n    base_url="${API_URL}"\n)\n\n# SDK is now connected and ready to use!`)}
                   className="absolute right-3 top-3 p-1.5 bg-white/5 border border-white/10 rounded hover:bg-white/10 transition-all"
                 >
                   <Copy className="w-4 h-4 text-gray-400" />

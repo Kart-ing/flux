@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import HeroPage from './hero/page';
+import { getApiUrl } from '@/lib/config';
 
 export default function Home() {
   const router = useRouter();
@@ -10,7 +11,7 @@ export default function Home() {
 
   useEffect(() => {
     // Check if user is authenticated, if so redirect to dashboard
-    fetch('http://localhost:5001/api/auth/me', {
+    fetch(getApiUrl('/api/auth/me'), {
       credentials: 'include',
     })
       .then((res) => res.json())

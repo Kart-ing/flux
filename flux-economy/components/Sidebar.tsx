@@ -12,6 +12,7 @@ import {
   LogOut,
   DollarSign,
 } from 'lucide-react';
+import { getApiUrl } from '@/lib/config';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -26,7 +27,7 @@ export default function Sidebar() {
 
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:5001/api/auth/logout', {
+      await fetch(getApiUrl('/api/auth/logout'), {
         method: 'POST',
         credentials: 'include',
       });
